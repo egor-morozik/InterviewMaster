@@ -1,4 +1,18 @@
+# Enviroment
 .venv/
-app/**/__pycache__/
-.git
+.env
+
+# Cache
+**/__pycache__/
+**/*.pyc
+
+# Git
+.git/
 .gitignore
+
+#Docker
+Dockerfile
+.dockerignore
+
+# System
+.DS_Store

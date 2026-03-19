@@ -6,5 +6,12 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi[standart]>=0.135.1",
+    "pgvector>=0.4.2",
+    "sqlalchemy>=2.0.48",
     "uvicorn>=0.42.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.6",
 ]
