@@ -17,6 +17,7 @@ class SourceType(str, enum.Enum):
     """
     Source types for question collection.
     """
+
     TELEGRAM = "telegram"
     WEB = "web"
     API = "api"
@@ -28,6 +29,7 @@ class Source(Base):
     Source for question collection.
     Хранит состояние скрейпинга для защиты от повторного чтения.
     """
+
     __tablename__ = "sources"
 
     id: Mapped[int] = mapped_column(
@@ -84,4 +86,3 @@ class Source(Base):
 
     def __repr__(self) -> str:
         return f"Source(id={self.id}, name='{self.name}', type={self.type.value})"
-    

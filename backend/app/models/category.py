@@ -14,6 +14,7 @@ class Category(Base):
     """
     Question category (Python, SQL, Redis...).
     """
+
     __tablename__ = "categories"
 
     id: Mapped[int] = mapped_column(
@@ -53,4 +54,3 @@ class Category(Base):
 
     def __repr__(self) -> str:
         return f"Category(id={self.id}, name='{self.name}', slug='{self.slug}')"
-    

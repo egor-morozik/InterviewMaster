@@ -4,8 +4,8 @@ from app.models.source import Source, SourceType
 
 
 __all__ = [
-    "Category", 
-    "Source", 
-    "SourceType", 
+    "Category",
+    "Source",
+    "SourceType",
     "Question",
 ]

@@ -26,6 +26,7 @@ class Question(Base):
     """
     Interview question.
     """
+
     __tablename__ = "questions"
 
     id: Mapped[int] = mapped_column(
@@ -85,4 +86,3 @@ class Question(Base):
 
     def __repr__(self) -> str:
         return f"Question(id={self.id}, text='{self.text[:50]}...')"
-    
