@@ -1,0 +1,26 @@
+# Python & UV 
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Databases & Logs
+*.sqlite
+*.log
+data/
