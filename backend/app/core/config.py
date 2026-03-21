@@ -1,5 +1,7 @@
 import os
 
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 
@@ -14,8 +16,19 @@ class Settings:
     POSTGRES_DB: str = os.getenv("POSTGRES_DB", "interview_db")
 
     @property
-    def POSTGRES_URL(self):
-        return f"postgresql+psycopg2://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+    def DATABASE_URL(self) -> str:
+        return (
+            f"postgresql+psycopg2://{self.POSTGRES_USER}:"
+            f"{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:"
+            f"{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+        )
+    
+    CONFIG_DIR: Path = Path(os.getenv("CONFIG_DIR", "config"))
+    TOPICS_FILE: str = os.getenv("TOPICS_FILE", "topics.json")
+
+    @property
+    def TOPICS_PATH(self) -> Path:
+        return self.CONFIG_DIR / self.TOPICS_FILE
 
 
 settings = Settings()
