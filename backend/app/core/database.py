@@ -11,8 +11,8 @@ class Base(DeclarativeBase):
 engine = create_async_engine(
     settings.POSTGRES_URL,
     pool_pre_ping=True,
+    echo=False,
 )
-
 
 AsyncSessionLocal = async_sessionmaker(
     autocommit=False,
@@ -20,18 +20,3 @@ AsyncSessionLocal = async_sessionmaker(
     bind=engine,
     class_=AsyncSession,
 )
-
-
-async def get_db():
-    """
-    Async session generator for DB.
-    """
-    async with AsyncSessionLocal() as session:
-        try:
-            yield session
-            await session.commit()
-        except Exception:
-            await session.rollback()
-            raise
-        finally:
-            await session.close()

@@ -12,33 +12,20 @@ services:
     image: ollama/ollama:latest
     ports:
       - "11434:11434"
-    command:
-      - |
-        cp /init/ollama-init.sh /tmp/
-        chmod +x /tmp/ollama-init.sh
-        /tmp/ollama-init.sh &
-        /bin/ollama serve
     volumes:
       - ollama_/root/.ollama
-      - ./scripts:/init:ro  
+      - ./scripts/ollama-init.sh:/init/ollama-init.sh:ro  
+    command: >
+      sh -c "
+        if [ -f /init/ollama-init.sh ]; then
+          /init/ollama-init.sh &
+        fi &&
+        /bin/ollama serve
+      "
     deploy:
       resources:
         limits:
           memory: 4G
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    env_file:
-      - ./config/.env
-    depends_on:
-      - db
-      - ollama
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./config:/config:ro 
 
 volumes:
   postgres_:
