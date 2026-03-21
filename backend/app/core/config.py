@@ -22,7 +22,7 @@ class Settings:
             f"{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:"
             f"{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
         )
-    
+
     CONFIG_DIR: Path = Path(os.getenv("CONFIG_DIR", "config"))
     TOPICS_FILE: str = os.getenv("TOPICS_FILE", "topics.json")
 

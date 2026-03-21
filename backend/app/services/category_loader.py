@@ -27,9 +27,7 @@ class CategoryLoader:
 
         count = 0
         for cat_data in config.get("categories", []):
-            existing = self.db.query(Category).filter_by(
-                slug=cat_data["slug"]
-            ).first()
+            existing = self.db.query(Category).filter_by(slug=cat_data["slug"]).first()
 
             if existing:
                 existing.name = cat_data["name"]
@@ -45,4 +43,3 @@ class CategoryLoader:
 
         self.db.commit()
         return count
-    
