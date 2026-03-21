@@ -1,0 +1,53 @@
+{
+    "categories": [{
+            "name": "Python",
+            "slug": "python",
+            "description": "Язык Python: синтаксис, ООП, особенности, стандартная библиотека"
+        },
+        {
+            "name": "SQL",
+            "slug": "sql",
+            "description": "Базы данных, SQL-запросы, индексы, транзакции, оптимизация"
+        },
+        {
+            "name": "Redis",
+            "slug": "redis",
+            "description": "Redis: кэширование, структуры данных, pub/sub, персистентность"
+        },
+        {
+            "name": "Message Queues",
+            "slug": "mq",
+            "description": "Очереди сообщений: Kafka, RabbitMQ, Celery, архитектура"
+        },
+        {
+            "name": "Web",
+            "slug": "web",
+            "description": "HTTP, REST, WebSocket, аутентификация, middleware"
+        },
+        {
+            "name": "System Design",
+            "slug": "system-design",
+            "description": "Архитектура, масштабируемость, микросервисы, балансировка"
+        },
+        {
+            "name": "CS Fundamentals",
+            "slug": "cs-fundamentals",
+            "description": "Алгоритмы, структуры данных, ОС, сети, сложность"
+        },
+        {
+            "name": "Django",
+            "slug": "django",
+            "description": "Фреймворк Django: ORM, views, middleware, admin"
+        },
+        {
+            "name": "FastAPI",
+            "slug": "fastapi",
+            "description": "FastAPI: роутинг, зависимости, валидация, async"
+        },
+        {
+            "name": "Docker & DevOps",
+            "slug": "devops",
+            "description": "Docker, CI/CD, деплой, мониторинг, логирование"
+        }
+    ]
+}
