@@ -2,17 +2,22 @@ services:
   db:
     image: pgvector/pgvector:pg18
     env_file:
-      - .env  
+      - ./config/.env:ro
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     env_file:
-      - .env 
+      - ./config/.env:ro
     depends_on:
       - db
     ports:
       - "8000:8000"
+
+volumes:
+  postgres_data:
