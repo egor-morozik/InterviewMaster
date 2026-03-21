@@ -30,5 +30,8 @@ class Settings:
     def TOPICS_PATH(self) -> Path:
         return self.CONFIG_DIR / self.TOPICS_FILE
 
+    OLLAMA_HOST: str = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+    OLLAMA_MODEL: str = os.getenv("OLLAMA_MODEL", "qwen2.5:latest")
+
 
 settings = Settings()
