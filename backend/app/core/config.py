@@ -16,9 +16,9 @@ class Settings:
     POSTGRES_DB: str = os.getenv("POSTGRES_DB", "interview_db")
 
     @property
-    def DATABASE_URL(self) -> str:
+    def POSTGRES_URL(self) -> str:
         return (
-            f"postgresql+psycopg2://{self.POSTGRES_USER}:"
+            f"postgresql+asyncpg://{self.POSTGRES_USER}:"
             f"{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:"
             f"{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
         )

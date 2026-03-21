@@ -1,3 +1,5 @@
+import asyncio
+
 from sentence_transformers import SentenceTransformer
 
 
@@ -21,3 +23,10 @@ def get_embedding(text: str) -> list[float]:
     model = get_embedding_model()
     embedding = model.encode(text, convert_to_numpy=True)
     return embedding.tolist()
+
+
+async def get_embedding_async(text: str) -> list[float]:
+    """
+    Async format to get_embeddings.
+    """
+    return await asyncio.to_thread(get_embedding, text)

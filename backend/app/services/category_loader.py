@@ -1,6 +1,7 @@
 import json
 
-from sqlalchemy.orm import Session
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
 from app.models.category import Category
@@ -8,14 +9,14 @@ from app.models.category import Category
 
 class CategoryLoader:
     """
-    Load categories from json to DB.
+    Load categories from json to DB (async version).
     """
 
-    def __init__(self, session: Session):
+    def __init__(self, session: AsyncSession):
         self.db = session
         self.config_path = settings.TOPICS_PATH
 
-    def load(self) -> int:
+    async def load(self) -> int:
         """
         Realize loading and return number of categories.
         """
@@ -27,7 +28,10 @@ class CategoryLoader:
 
         count = 0
         for cat_data in config.get("categories", []):
-            existing = self.db.query(Category).filter_by(slug=cat_data["slug"]).first()
+            result = await self.db.execute(
+                select(Category).filter_by(slug=cat_data["slug"])
+            )
+            existing = result.scalar_one_or_none()
 
             if existing:
                 existing.name = cat_data["name"]
@@ -41,5 +45,5 @@ class CategoryLoader:
                 self.db.add(category)
                 count += 1
 
-        self.db.commit()
+        await self.db.commit()
         return count
