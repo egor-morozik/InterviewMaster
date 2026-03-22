@@ -5,13 +5,7 @@ import string
 
 def get_text_normalize(text: str) -> str:
     """
-    Нормализует текст для сравнения на дубликаты.
-
-    Что делает:
-    • Приводит к нижнему регистру
-    • Удаляет пунктуацию
-    • Заменяет множественные пробелы на один
-    • Trim
+    Normilize to find duplications.
     """
     text = text.lower()
     text = text.translate(str.maketrans("", "", string.punctuation))
