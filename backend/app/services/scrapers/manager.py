@@ -1,3 +1,4 @@
+import asyncio
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.source import Source, SourceType
@@ -64,18 +65,24 @@ class ScraperManager:
 
     async def scrape_all(self) -> dict[int, int]:
         """
-        Scrape all known sources and return results dict.
+        Scrape all known sources in parallel and return results dict.
         """
         from app.services.model_loader.source_loader import SourceService
 
         source_service = SourceService(self.db)
         sources = await source_service.get_all()
 
-        results = {}
-        for source in sources:
-            count = await self.scrape_source(source)
-            results[source.id] = count
-        return results
+        semaphore = asyncio.Semaphore(4)
+
+        async def scrape_with_semaphore(source: Source) -> tuple[int, int]:
+            async with semaphore:
+                count = await self.scrape_source(source)
+                return source.id, count
+
+        tasks = [scrape_with_semaphore(s) for s in sources]
+        results_list = await asyncio.gather(*tasks)
+
+        return dict(results_list)
 
     async def discover_new_sources(
         self,
