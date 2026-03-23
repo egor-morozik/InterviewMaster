@@ -14,7 +14,7 @@ services:
       - "11434:11434"
     volumes:
       - ollama_/root/.ollama
-      - ./scripts/ollama-init.sh:/init/ollama-init.sh:ro  
+      - ./scripts/ollama-init.sh:/init/ollama-init.sh:ro
     command: >
       sh -c "
         if [ -f /init/ollama-init.sh ]; then
